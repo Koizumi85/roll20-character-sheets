@@ -17006,8 +17006,6 @@ on("change:repeating_shields change:sf_schildkampfI change:sf_schildkampfII chan
 
         getAttrs(variablesToGet, function(values) {
             let result = calculateShieldAttack(values, activeShieldRowId);
-            console.log('calculated shield attack');
-            console.log(result);
             setAttrs({ shield_at: result.shieldAt, shield_at_available: result.shieldAtAvailable });
         });
 
