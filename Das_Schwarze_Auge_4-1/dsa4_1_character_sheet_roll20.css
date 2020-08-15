@@ -1763,6 +1763,87 @@ The solution: convert the <input>s to type="text" and make them look like normal
     justify-self: center;
 }
 
+.sheet-grid-melee-actions-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 200px));
+    grid-gap: 5px;
+}
+
+.sheet-grid-melee-actions {
+    display: grid;
+    grid-template-columns: 5px auto auto 5px;
+    grid-auto-rows: 30px;
+    border: 1px solid blacK;
+}
+
+.sheet-grid-attack-actions {
+    grid-column-start: 1;
+}
+
+.sheet-grid-parry-actions {
+    grid-column-start: 2;
+}
+
+.sheet-grid-shield-actions {
+    grid-column-start: 3;
+}
+
+.sheet-grid-melee-actions-button {
+    grid-column-start: 2;
+    grid-row-start: auto;
+    justify-self: left;
+    align-self: center;
+}
+
+.sheet-grid-melee-actions-button-mod {
+    grid-column-start: 3;
+    grid-row-start: auto;
+    justify-self: right;
+    align-self: center;
+}
+
+.sheet-grid-melee-actions-button-single {
+    grid-column-start: 2;
+    grid-column-end: span 2;
+    grid-row-start: auto;
+    justify-self: left;
+    align-self: center;
+}
+
+.sheet-grid-melee-actions-label {
+    grid-column-start: 2;
+    grid-column-end: span 2;
+    grid-row-start: auto;
+    align-self: center;
+    text-align: center;
+    font-weight: bold;
+}
+
+.sheet-ruestungsschutz-container {
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    grid-template-columns: repeat(8, [content-column] max-content);
+    grid-gap: 5px;
+}
+
+.sheet-ruestungsschutz-label {
+    grid-column-start: auto;
+    grid-row-start: 1;
+    font-weight: bold;
+    text-align: center;
+    align-self: center;
+    justify-self: center;
+}
+
+.sheet-ruestungsschutz-value {
+    grid-column-start: auto;
+    grid-row-start: 2;
+    text-align: center;
+    align-self: center;
+    justify-self: center;
+}
+
 .sheet-centering-div {
     display: grid;
     justify-items: center;
