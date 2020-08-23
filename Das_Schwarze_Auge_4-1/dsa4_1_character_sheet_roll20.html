@@ -13384,326 +13384,102 @@
     {{/rollWasFumble() wurf}}
 </rolltemplate>
 
+
+{{name=Fernkampfangriff}}
+{{mod=[[(@{fkr_erschwernis_gesamt}) - (@{fkr_erschwernis_ansage_gesamt})]]}}
+{{ansage=[[@{fkr_erschwernis_ansage_gesamt}]]}} 
+{{modansage=[[@{fkr_erschwernis_gesamt}]]}} 
+{{wert=[[(@{FK_Aktiv})]]}} 
+{{eff_wert=[[(@{FK_Aktiv}) - (@{fkr_erschwernis_gesamt})]]}} 
+{{eff_wert_ohne_kampfgetuemmel=[[(@{FK_Aktiv}) - (@{fkr_erschwernis_ohne_kampfgetuemmel})]]}} 
+{{ZieleKampfgetuemmel=[[@{fkr_kampfgetuemmel_ziele}]]}} 
+{{wurf=[[1d20cs1cf20]]}} 
+{{pruefwurf=[[1d20cs1cf20]]}}
 <rolltemplate class="sheet-rolltemplate-DSA-Fernkampf-AT">
-{{#rollLess() eff_wert 0}}
+    <span class="col1 colspan4 row1 roll-name" >{{name}}</span>
+    <span class="col1 row2 sheet-abbr" title="Fernkampf-Angriffswert">FK-Wert: </span>
+    <span class="col2 row2">{{wert}}</span>
+    <span class="col3 row2 sheet-abbr" title="Erschwernisse durch äußere Umstände">Mod: </span>
+    <span class="col4 row2">{{mod}}</span>
+    <span class="col3 row3 sheet-abbr" title="Erschwernis durch freiwillige Ansage">Ansage: </span>
+    <span class="col4 row3">{{ansage}}</span>
+    <span class="col1 colspan3 row4">Würfelergebnis: </span>
+    <span class="col4 row4 sheet-abbr">{{wurf}}</span>
+
+    <!-- Different colors for the general result line -->
+    {{#rollWasCrit() wurf}}<div class="roll-crit colspan4 row5 result">{{/rollWasCrit() wurf}}
+    {{#rollWasFumble() wurf}}<div class="roll-fumble colspan4 row5 result">{{/rollWasFumble() wurf}}
+    {{#^rollWasCrit() wurf}}
+        {{#^rollWasFumble() wurf}}
+            {{#^rollGreater() wurf eff_wert}}<div class="roll-success colspan4 row5 result">{{/^rollGreater() wurf eff_wert}}
+            {{#rollGreater() wurf eff_wert}}<div class="roll-fail colspan4 row5 result">{{/rollGreater() wurf eff_wert}}
+        {{/^rollWasFumble() wurf}}
+    {{/^rollWasCrit() wurf}}
+
+        <span class="col1 row1">Ergebnis: </span>
+    <!-- Textual representation of the result -->
+        {{#^rollGreater() wurf eff_wert}}<span class="col2 row1">Gelungen</span>{{/^rollGreater() wurf eff_wert}}
+        {{#rollGreater() wurf eff_wert}}<span class="col2 row1">Misslungen</span>{{/rollGreater() wurf eff_wert}}
+    </div>
+
+    <!-- If it was a 1 -->
+    {{#rollWasCrit() wurf}}
+        <!-- pruefwurf roll was set -->
+        {{#pruefwurf}}
+            <!-- add color if the roll was confirmed -->
+            {{#^rollGreater() pruefwurf eff_wert}}<div class="roll-confirmed-crit colspan4 row6 confirm-roll-details">{{/^rollGreater() pruefwurf eff_wert}}
+            {{#rollGreater() pruefwurf eff_wert}}<div class="colspan4 row6 confirm-roll-details">{{/rollGreater() pruefwurf eff_wert}}                
+                <span class="col1 row1">Prüfwurf: </span>
+                <span class="col2 row1 sheet-abbr">{{pruefwurf}}</span>
+                {{#^rollGreater() pruefwurf eff_wert}}
+                    <div class="col1 colspan2 row2">
+                        <span title="Prüfwurf ergab kritischen Treffer. Auswirkungen gemäß WdS S. 84 beachten!">Kritischer Treffer!</span></div>
+                {{/^rollGreater() pruefwurf eff_wert}}
+            </div>
+        {{/pruefwurf}}
+        <!-- no pruefwurf roll was set -->
+        {{^pruefwurf}}
+            <span class="col1 colspan4 row6 sheet-abbr" title="Automatische Prüfwürfe deaktiviert. Daher Prüfwurf manuell gegen angezeigten Wert durchführen.">Prüfwurf durchführen. <br /> Kritischer Treffer bei Wurf &lt;= {{eff_wert}}</span>
+        {{/pruefwurf}}
+    {{/rollWasCrit() wurf}}
+    <!-- if it was a 20 -->
     {{#rollWasFumble() wurf}}
-        {{#rollWasCrit() pruefwurf}}
-            <table class="sheet-templates-fail-cru">
-        {{/rollWasCrit() pruefwurf}}
-        {{#rollWasFumble() pruefwurf}}
-            <table class="sheet-templates-fail-crc">
-        {{/rollWasFumble() pruefwurf}}
-        {{#^rollWasCrit() pruefwurf}}
-            {{#^rollWasFumble() pruefwurf}}
-                {{#rollTotal() pruefwurf eff_wert}}
-                    <table class="sheet-templates-fail-cru">
-                {{/rollTotal() pruefwurf eff_wert}}
-                {{#rollLess() pruefwurf eff_wert}}
-                    <table class="sheet-templates-fail-cru">
-                {{/rollLess() pruefwurf eff_wert}}
+        <!-- pruefwurf roll was set -->
+        {{#pruefwurf}}
+            <!-- add color if the roll was confirmed -->
+            {{#rollGreater() pruefwurf eff_wert}}<div class="roll-confirmed-fumble colspan4 row6 confirm-roll-details">{{/rollGreater() pruefwurf eff_wert}}
+            {{#^rollGreater() pruefwurf eff_wert}}<div class="colspan4 row6 confirm-roll-details">{{/^rollGreater() pruefwurf eff_wert}}                
+                <span class="col1 row1">Prüfwurf: </span>
+                <span class="col2 row1 sheet-abbr">{{pruefwurf}}</span>
                 {{#rollGreater() pruefwurf eff_wert}}
-                    <table class="sheet-templates-fail-crc">
+                    <div class="col1 colspan2 row2">
+                        <span class="sheet-abbr" title="Prüfwurf ergab bestätigten Fernkampf-Patzer. Die Patzerfolgen können mit Button 'Patzer' in der Fernkampf-Box bestimmt werden" >Bestätigter Fernkampf-Patzer! </span><br />
+                        Patzerfolgen auswürfeln!</div>
                 {{/rollGreater() pruefwurf eff_wert}}
-            {{/^rollWasFumble() pruefwurf}}
-        {{/^rollWasCrit() pruefwurf}}
+            </div>
+        {{/pruefwurf}}
+        <!-- no pruefwurf roll was set -->
+        {{^pruefwurf}}
+            <span class="col1 colspan4 row6 sheet-abbr" title="Automatische Prüfwürfe deaktiviert. Daher Prüfwurf manuell gegen angezeigten Wert durchführen.">Prüfwurf durchführen. <br /> Patzer bei Wurf &gt; {{eff_wert}}</span>
+        {{/pruefwurf}}
     {{/rollWasFumble() wurf}}
+
+    <!-- Schuss ins Kampfgetümmel nur anzeigen wenn kein Patzer und {{ wurf }} größer eff_wert -->
     {{#^rollWasFumble() wurf}}
-        <table class="sheet-templates-fail-uncr">
+        {{#rollGreater() wurf eff_wert}}
+            {{#rollGreater() ZieleKampfgetuemmel 1}}
+                <div class="col1 colspan4 row6">
+                    Misslungener Schuss ins Kampfgetümmel trifft 
+                    {{#^rollGreater() wurf eff_wert_ohne_kampfgetuemmel}}
+                        <span class="sheet-abbr" title="Ziel auswürfeln: Jedem Ziel eine Augenzahl zuweisen, dann auswürfeln. Beispiel mit fünf Beteiligten: Im Chat &bdquo;[[1d5]]&ldquo; schreiben und das Ergebnis ablesen.">zufällig einen der {{ZieleKampfgetuemmel}} Beteiligten.</span>
+                    {{/^rollGreater() wurf eff_wert_ohne_kampfgetuemmel}}
+                    {{#rollGreater() wurf eff_wert_ohne_kampfgetuemmel}}
+                        niemanden
+                    {{/rollGreater() wurf eff_wert_ohne_kampfgetuemmel}}
+                </div>
+            {{/rollGreater() ZieleKampfgetuemmel 1}}
+        {{/rollGreater() wurf eff_wert}}
     {{/^rollWasFumble() wurf}}
-{{/rollLess() eff_wert 0}}
-{{#^rollLess() eff_wert 0}}
-    {{#rollTotal() wurf eff_wert}}
-        {{#rollWasCrit() wurf}}
-            {{#rollWasCrit() pruefwurf}}
-                <table class="sheet-templates-succ-crc">
-            {{/rollWasCrit() pruefwurf}}
-            {{#rollWasFumble() pruefwurf}}
-                <table class="sheet-templates-succ-cru">
-            {{/rollWasFumble() pruefwurf}}
-            {{#^rollWasCrit() pruefwurf}}
-                {{#^rollWasFumble() pruefwurf}}
-                    {{#rollTotal() pruefwurf eff_wert}}
-                        <table class="sheet-templates-succ-crc">
-                    {{/rollTotal() pruefwurf eff_wert}}
-                    {{#rollLess() pruefwurf eff_wert}}
-                        <table class="sheet-templates-succ-crc">
-                    {{/rollLess() pruefwurf eff_wert}}
-                    {{#rollGreater() pruefwurf eff_wert}}
-                        <table class="sheet-templates-succ-cru">
-                    {{/rollGreater() pruefwurf eff_wert}}
-                {{/^rollWasFumble() pruefwurf}}
-            {{/^rollWasCrit() pruefwurf}}
-        {{/rollWasCrit() wurf}}
-        {{#rollWasFumble() wurf}}
-            {{#rollWasCrit() pruefwurf}}
-                <table class="sheet-templates-fail-cru">
-            {{/rollWasCrit() pruefwurf}}
-            {{#rollWasFumble() pruefwurf}}
-                <table class="sheet-templates-fail-crc">
-            {{/rollWasFumble() pruefwurf}}
-            {{#^rollWasCrit() pruefwurf}}
-                {{#^rollWasFumble() pruefwurf}}
-                    {{#rollTotal() pruefwurf eff_wert}}
-                        <table class="sheet-templates-fail-cru">
-                    {{/rollTotal() pruefwurf eff_wert}}
-                    {{#rollLess() pruefwurf eff_wert}}
-                        <table class="sheet-templates-fail-cru">
-                    {{/rollLess() pruefwurf eff_wert}}
-                    {{#rollGreater() pruefwurf eff_wert}}
-                        <table class="sheet-templates-fail-crc">
-                    {{/rollGreater() pruefwurf eff_wert}}
-                {{/^rollWasFumble() pruefwurf}}
-            {{/^rollWasCrit() pruefwurf}}
-        {{/rollWasFumble() wurf}}
-        {{#^rollWasCrit() wurf}}
-            {{#^rollWasFumble() wurf}}
-                <table class="sheet-templates-succ-uncr">
-            {{/^rollWasFumble() wurf}}
-        {{/^rollWasCrit() wurf}}
-    {{/rollTotal() wurf eff_wert}}
-    {{#rollLess() wurf eff_wert}}
-        {{#rollWasCrit() wurf}}
-            {{#rollWasCrit() pruefwurf}}
-                <table class="sheet-templates-succ-crc">
-            {{/rollWasCrit() pruefwurf}}
-            {{#rollWasFumble() pruefwurf}}
-                <table class="sheet-templates-succ-cru">
-            {{/rollWasFumble() pruefwurf}}
-            {{#^rollWasCrit() pruefwurf}}
-                {{#^rollWasFumble() pruefwurf}}
-                    {{#rollTotal() pruefwurf eff_wert}}
-                        <table class="sheet-templates-succ-crc">
-                    {{/rollTotal() pruefwurf eff_wert}}
-                    {{#rollLess() pruefwurf eff_wert}}
-                        <table class="sheet-templates-succ-crc">
-                    {{/rollLess() pruefwurf eff_wert}}
-                    {{#rollGreater() pruefwurf eff_wert}}
-                        <table class="sheet-templates-succ-cru">
-                    {{/rollGreater() pruefwurf eff_wert}}
-                {{/^rollWasFumble() pruefwurf}}
-            {{/^rollWasCrit() pruefwurf}}
-        {{/rollWasCrit() wurf}}
-        {{#rollWasFumble() wurf}}
-            {{#rollWasCrit() pruefwurf}}
-                <table class="sheet-templates-fail-cru">
-            {{/rollWasCrit() pruefwurf}}
-            {{#rollWasFumble() pruefwurf}}
-                <table class="sheet-templates-fail-crc">
-            {{/rollWasFumble() pruefwurf}}
-            {{#^rollWasCrit() pruefwurf}}
-                {{#^rollWasFumble() pruefwurf}}
-                    {{#rollTotal() pruefwurf eff_wert}}
-                        <table class="sheet-templates-fail-cru">
-                    {{/rollTotal() pruefwurf eff_wert}}
-                    {{#rollLess() pruefwurf eff_wert}}
-                        <table class="sheet-templates-fail-cru">
-                    {{/rollLess() pruefwurf eff_wert}}
-                    {{#rollGreater() pruefwurf eff_wert}}
-                        <table class="sheet-templates-fail-crc">
-                    {{/rollGreater() pruefwurf eff_wert}}
-                {{/^rollWasFumble() pruefwurf}}
-            {{/^rollWasCrit() pruefwurf}}
-        {{/rollWasFumble() wurf}}
-        {{#^rollWasCrit() wurf}}
-            {{#^rollWasFumble() wurf}}
-            <table class="sheet-templates-succ-uncr">
-            {{/^rollWasFumble() wurf}}
-        {{/^rollWasCrit() wurf}}
-    {{/rollLess() wurf eff_wert}}
-    {{#rollGreater() wurf eff_wert}}
-        {{#rollWasCrit() wurf}}
-            {{#rollWasCrit() pruefwurf}}
-                <table class="sheet-templates-succ-crc">
-            {{/rollWasCrit() pruefwurf}}
-            {{#rollWasFumble() pruefwurf}}
-                <table class="sheet-templates-succ-cru">
-            {{/rollWasFumble() pruefwurf}}
-            {{#^rollWasCrit() pruefwurf}}
-                {{#^rollWasFumble() pruefwurf}}
-                    {{#rollTotal() pruefwurf eff_wert}}
-                        <table class="sheet-templates-succ-crc">
-                    {{/rollTotal() pruefwurf eff_wert}}
-                    {{#rollLess() pruefwurf eff_wert}}
-                        <table class="sheet-templates-succ-crc">
-                    {{/rollLess() pruefwurf eff_wert}}
-                    {{#rollGreater() pruefwurf eff_wert}}
-                        <table class="sheet-templates-succ-cru">
-                    {{/rollGreater() pruefwurf eff_wert}}
-                {{/^rollWasFumble() pruefwurf}}
-            {{/^rollWasCrit() pruefwurf}}
-        {{/rollWasCrit() wurf}}
-        {{#rollWasFumble() wurf}}
-            {{#rollWasCrit() pruefwurf}}
-                <table class="sheet-templates-fail-cru">
-            {{/rollWasCrit() pruefwurf}}
-            {{#rollWasFumble() pruefwurf}}
-                <table class="sheet-templates-fail-crc">
-            {{/rollWasFumble() pruefwurf}}
-            {{#^rollWasCrit() pruefwurf}}
-                {{#^rollWasFumble() pruefwurf}}
-                    {{#rollTotal() pruefwurf eff_wert}}
-                        <table class="sheet-templates-fail-cru">
-                    {{/rollTotal() pruefwurf eff_wert}}
-                    {{#rollLess() pruefwurf eff_wert}}
-                        <table class="sheet-templates-fail-cru">
-                    {{/rollLess() pruefwurf eff_wert}}
-                    {{#rollGreater() pruefwurf eff_wert}}
-                        <table class="sheet-templates-fail-crc">
-                    {{/rollGreater() pruefwurf eff_wert}}
-                {{/^rollWasFumble() pruefwurf}}
-            {{/^rollWasCrit() pruefwurf}}
-        {{/rollWasFumble() wurf}}
-        {{#^rollWasCrit() wurf}}
-            {{#^rollWasFumble() wurf}}
-                <table class="sheet-templates-fail-uncr">
-            {{/^rollWasFumble() wurf}}
-        {{/^rollWasCrit() wurf}}
-    {{/rollGreater() wurf eff_wert}}
-{{/^rollLess() eff_wert 0}}
-        <tr>
-            <th colspan="3">{{name}}</th>
-        </tr>
-{{#rollGreater() ansage 0}}
-        <tr>
-            <td colspan="3" class="sheet-templates-result">
-                <span class="sheet-abbr" title="Fernkampf">FK</span>-Angriff {{#rollLess() modansage 0}}{{modansage}}{{/rollLess() modansage 0}}{{#rollTotal() modansage 0}}&#177;{{modansage}}{{/rollTotal() modansage 0}}{{#rollGreater() modansage 0}}+{{modansage}}{{/rollGreater() modansage 0}} <span class="sheet-templates-result-content"></span> ({{wurf}}).
-            </td>
-        </tr>
-{{#rollGreater() ZieleKampfgetuemmel 1}}
-        <tr>
-            <td colspan="3">
-                Schuss ins Kampfgetümmel trifft 
-                {{#^rollGreater() wurf eff_wert}}das beabsichtigte Ziel.{{/^rollGreater() wurf eff_wert}}
-                {{#^rollWasFumble() wurf}}
-                    {{#rollGreater() wurf eff_wert}}
-                        {{#^rollGreater() wurf eff_wert_ohne_kampfgetuemmel}}
-                            <span class="sheet-abbr" title="Ziel auswürfeln: Jedem Ziel eine Augenzahl zuweisen, dann auswürfeln. Beispiel mit fünf Beteiligten: Im Chat &bdquo;[[1d5]]&ldquo; schreiben und das Ergebnis ablesen.">zufällig einen der {{ZieleKampfgetuemmel}} Beteiligten.</span>
-                        {{/^rollGreater() wurf eff_wert_ohne_kampfgetuemmel}}
-                        {{#rollGreater() wurf eff_wert_ohne_kampfgetuemmel}}
-                            niemanden.
-                        {{/rollGreater() wurf eff_wert_ohne_kampfgetuemmel}}
-                    {{/rollGreater() wurf eff_wert}}
-                {{/^rollWasFumble() wurf}}
-                {{#rollWasFumble() wurf}}
-                    niemanden.
-                {{/rollWasFumble() wurf}}
-            </td>
-        </tr>
-{{/rollGreater() ZieleKampfgetuemmel 1}}
-        <tr>
-            <td><span class="sheet-abbr" title="Fernkampf">FK</span>-Wert: {{wert}}</td>
-            <td><span class="sheet-abbr" title="Modifikator">Mod.</span>: {{#rollLess() mod 0}}{{mod}}{{/rollLess() mod 0}}
-{{#rollTotal() mod 0}}&#177;{{mod}}{{/rollTotal() mod 0}}
-{{#rollGreater() mod 0}}+{{mod}}{{/rollGreater() mod 0}}</td>
-            <td>Ansage: {{ansage}}</td>
-        </tr>
-{{/rollGreater() ansage 0}}
-{{#^rollGreater() ansage 0}}
-        <tr>
-            <td colspan="3" class="sheet-templates-result"><span class="sheet-abbr" title="Fernkampf">FK</span>-Angriff {{#rollLess() mod 0}}{{mod}}{{/rollLess() mod 0}}{{#rollTotal() mod 0}}&#177;{{mod}}{{/rollTotal() mod 0}}{{#rollGreater() mod 0}}+{{mod}}{{/rollGreater() mod 0}} <span class="sheet-templates-result-content"></span> ({{wurf}}).</td>
-        </tr>
-{{#rollGreater() ZieleKampfgetuemmel 1}}
-        <tr>
-            <td colspan="3">
-                Schuss ins Kampfgetümmel trifft 
-                {{#^rollGreater() wurf eff_wert}}das beabsichtigte Ziel.{{/^rollGreater() wurf eff_wert}}
-                {{#^rollWasFumble() wurf}}
-                    {{#rollGreater() wurf eff_wert}}
-                        {{#^rollGreater() wurf eff_wert_ohne_kampfgetuemmel}}
-                            <span class="sheet-abbr" title="Ziel auswürfeln: Jedem Ziel eine Augenzahl zuweisen, dann auswürfeln. Beispiel mit fünf Beteiligten: Im Chat &bdquo;[[1d5]]&ldquo; schreiben und das Ergebnis ablesen.">zufällig einen der {{ZieleKampfgetuemmel}} Beteiligten.</span>
-                        {{/^rollGreater() wurf eff_wert_ohne_kampfgetuemmel}}
-                        {{#rollGreater() wurf eff_wert_ohne_kampfgetuemmel}}
-                            niemanden.
-                        {{/rollGreater() wurf eff_wert_ohne_kampfgetuemmel}}
-                    {{/rollGreater() wurf eff_wert}}
-                {{/^rollWasFumble() wurf}}
-                {{#rollWasFumble() wurf}}
-                    niemanden.
-                {{/rollWasFumble() wurf}}
-            </td>
-        </tr>
-{{/rollGreater() ZieleKampfgetuemmel 1}}
-        <tr>
-            <td colspan="3"><span class="sheet-abbr" title="Fernkampf">FK</span>-Wert: {{wert}}</td>
-        </tr>
-{{/^rollGreater() ansage 0}}
-        {{#rollLess() eff_wert 0}}
-        <tr>
-            <td colspan="3" class="sheet-templates-warning"><span class="sheet-abbr" title="Übersteigt die Erschwernis den Fernkampfwert, so geht der Schuss immer daneben, selbst bei einer 1. Patzer sind dadurch aber nicht ebenfalls ausgeschlossen.">Automatischer Misserfolg.</span></td>
-        </tr>
-            {{#rollWasFumble() wurf}}
-            <tr>
-                {{#rollWasCrit() pruefwurf}}
-                    <td colspan="3" class="sheet-templates-warning">Unbestätigter Fernkampfpatzer! Prüfwurf: {{pruefwurf}}. Auswirkungen zum Glück verhindert.</td>
-                {{/rollWasCrit() pruefwurf}}
-                {{#rollWasFumble() pruefwurf}}
-                    <td colspan="3" class="sheet-templates-warning">Bestätigter Fernkampfpatzer! Prüfwurf: {{pruefwurf}}. Auswirkungen erwürfeln.</td>
-                {{/rollWasFumble() pruefwurf}}
-                {{#^rollWasCrit() pruefwurf}}
-                    {{#^rollWasFumble() pruefwurf}}
-                        {{#rollTotal() pruefwurf eff_wert}}
-                            <td colspan="3" class="sheet-templates-warning">Unbestätigter Fernkampfpatzer! Prüfwurf: {{pruefwurf}}. Auswirkungen zum Glück verhindert.</td>
-                        {{/rollTotal() pruefwurf eff_wert}}
-                        {{#rollLess() pruefwurf eff_wert}}
-                            <td colspan="3" class="sheet-templates-warning">Unbestätigter Fernkampfpatzer! Prüfwurf: {{pruefwurf}}. Auswirkungen zum Glück verhindert.</td>
-                        {{/rollLess() pruefwurf eff_wert}}
-                        {{#rollGreater() pruefwurf eff_wert}}
-                            <td colspan="3" class="sheet-templates-warning">Bestätigter Fernkampfpatzer! Prüfwurf: {{pruefwurf}}. Auswirkungen erwürfeln.</td>
-                        {{/rollGreater() pruefwurf eff_wert}}
-                    {{/^rollWasFumble() pruefwurf}}
-                {{/^rollWasCrit() pruefwurf}}
-            </tr>
-            {{/rollWasFumble() wurf}}
-        {{/rollLess() eff_wert 0}}
-        {{#^rollLess() eff_wert 0}}
-            {{#rollWasCrit() wurf}}
-            <tr>
-                {{#rollWasCrit() pruefwurf}}
-                        <td colspan="3" class="sheet-templates-warning">Kritischer Treffer! Prüfwurf: {{pruefwurf}}. Besondere Auswirkungen eines unparierten Treffers beachten.</td>
-                {{/rollWasCrit() pruefwurf}}
-                {{#rollWasFumble() pruefwurf}}
-                        <td colspan="3" class="sheet-templates-warning">Glückliche Attacke! Prüfwurf: {{pruefwurf}}.</td>
-                {{/rollWasFumble() pruefwurf}}
-                {{#^rollWasCrit() pruefwurf}}
-                    {{#^rollWasFumble() pruefwurf}}
-                        {{#rollTotal() pruefwurf eff_wert}}
-                            <td colspan="3" class="sheet-templates-warning">Kritischer Treffer! Prüfwurf: {{pruefwurf}}. Besondere Auswirkungen eines unparierten Treffers beachten.</td>
-                        {{/rollTotal() pruefwurf eff_wert}}
-                        {{#rollLess() pruefwurf eff_wert}}
-                            <td colspan="3" class="sheet-templates-warning">Kritischer Treffer! Prüfwurf: {{pruefwurf}}. Besondere Auswirkungen eines unparierten Treffers beachten.</td>
-                        {{/rollLess() pruefwurf eff_wert}}
-                        {{#rollGreater() pruefwurf eff_wert}}
-                            <td colspan="3" class="sheet-templates-warning">Glückliche Attacke! Prüfwurf: {{pruefwurf}}.</td>
-                        {{/rollGreater() pruefwurf eff_wert}}
-                    {{/^rollWasFumble() pruefwurf}}
-                {{/^rollWasCrit() pruefwurf}}
-            </tr>
-            {{/rollWasCrit() wurf}}
-            {{#rollWasFumble() wurf}}
-            <tr>
-                {{#rollWasCrit() pruefwurf}}
-                    <td colspan="3" class="sheet-templates-warning">Unbestätigter Fernkampfpatzer! Prüfwurf: {{pruefwurf}}. Auswirkungen zum Glück verhindert.</td>
-                {{/rollWasCrit() pruefwurf}}
-                {{#rollWasFumble() pruefwurf}}
-                    <td colspan="3" class="sheet-templates-warning">Bestätigter Fernkampfpatzer! Prüfwurf: {{pruefwurf}}. Auswirkungen erwürfeln.</td>
-                {{/rollWasFumble() pruefwurf}}
-                {{#^rollWasCrit() pruefwurf}}
-                    {{#^rollWasFumble() pruefwurf}}
-                        {{#rollTotal() pruefwurf eff_wert}}
-                            <td colspan="3" class="sheet-templates-warning">Unbestätigter Fernkampfpatzer! Prüfwurf: {{pruefwurf}}. Auswirkungen zum Glück verhindert.</td>
-                        {{/rollTotal() pruefwurf eff_wert}}
-                        {{#rollLess() pruefwurf eff_wert}}
-                            <td colspan="3" class="sheet-templates-warning">Unbestätigter Fernkampfpatzer! Prüfwurf: {{pruefwurf}}. Auswirkungen zum Glück verhindert.</td>
-                        {{/rollLess() pruefwurf eff_wert}}
-                        {{#rollGreater() pruefwurf eff_wert}}
-                            <td colspan="3" class="sheet-templates-warning">Bestätigter Fernkampfpatzer! Prüfwurf: {{pruefwurf}}. Auswirkungen erwürfeln.</td>
-                        {{/rollGreater() pruefwurf eff_wert}}
-                    {{/^rollWasFumble() pruefwurf}}
-                {{/^rollWasCrit() pruefwurf}}
-            </tr>
-            {{/rollWasFumble() wurf}}
-        {{/^rollLess() eff_wert 0}}
-    </table>
 </rolltemplate>
 
 <rolltemplate class="sheet-rolltemplate-DSA-Kampf-Treffer">

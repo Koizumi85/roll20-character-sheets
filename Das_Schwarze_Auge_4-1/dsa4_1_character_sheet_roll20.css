@@ -1870,7 +1870,8 @@ The solution: convert the <input>s to type="text" and make them look like normal
     border: 1px solid gray;
     background-color: white;
 }
-.sheet-rolltemplate-DSA-Kampf-Ausweichen {
+.sheet-rolltemplate-DSA-Kampf-Ausweichen,
+.sheet-rolltemplate-DSA-Fernkampf-AT {
     margin-left: 7px;
     margin-top: 7px;
     display: grid;
@@ -1882,44 +1883,52 @@ The solution: convert the <input>s to type="text" and make them look like normal
 }
 .sheet-rolltemplate-DSA-Nahkampf-Attacke .sheet-roll-name,
 .sheet-rolltemplate-DSA-Nahkampf-Parade .sheet-roll-name,
-.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-roll-name {
+.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-roll-name,
+.sheet-rolltemplate-DSA-Fernkampf-AT .sheet-roll-name {
     font-weight: bold;
 }
 .sheet-rolltemplate-DSA-Nahkampf-Attacke .sheet-col1,
 .sheet-rolltemplate-DSA-Nahkampf-Parade .sheet-col1,
-.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-col1 {
+.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-col1,
+.sheet-rolltemplate-DSA-Fernkampf-AT .sheet-col1 {
     grid-column-start: 1;
 }
 .sheet-rolltemplate-DSA-Nahkampf-Attacke .sheet-col2,
 .sheet-rolltemplate-DSA-Nahkampf-Parade .sheet-col2,
-.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-col2 {
+.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-col2,
+.sheet-rolltemplate-DSA-Fernkampf-AT .sheet-col2 {
     grid-column-start: 2;
 }
 .sheet-rolltemplate-DSA-Nahkampf-Attacke .sheet-col3,
 .sheet-rolltemplate-DSA-Nahkampf-Parade .sheet-col3,
-.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-col3 {
+.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-col3,
+.sheet-rolltemplate-DSA-Fernkampf-AT .sheet-col3 {
     grid-column-start: 3;
 }
 .sheet-rolltemplate-DSA-Nahkampf-Attacke .sheet-col4,
 .sheet-rolltemplate-DSA-Nahkampf-Parade .sheet-col4,
-.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-col4 {
+.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-col4,
+.sheet-rolltemplate-DSA-Fernkampf-AT .sheet-col4 {
     grid-column-start: 4;
 }
 .sheet-rolltemplate-DSA-Nahkampf-Attacke .sheet-row1,
 .sheet-rolltemplate-DSA-Nahkampf-Parade .sheet-row1,
-.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-row1 {
+.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-row1,
+.sheet-rolltemplate-DSA-Fernkampf-AT .sheet-row1 {
     align-self: center;
     grid-row-start: 1;
 }
 .sheet-rolltemplate-DSA-Nahkampf-Attacke .sheet-row2,
 .sheet-rolltemplate-DSA-Nahkampf-Parade .sheet-row2,
-.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-row2 {
+.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-row2,
+.sheet-rolltemplate-DSA-Fernkampf-AT .sheet-row2 {
     align-self: center;
     grid-row-start: 2;
 }
 .sheet-rolltemplate-DSA-Nahkampf-Attacke .sheet-row3,
 .sheet-rolltemplate-DSA-Nahkampf-Parade .sheet-row3,
-.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-row3 {
+.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-row3,
+.sheet-rolltemplate-DSA-Fernkampf-AT .sheet-row3 {
     align-self: center;
     grid-row-start: 3;
 }
@@ -1927,74 +1936,88 @@ The solution: convert the <input>s to type="text" and make them look like normal
 .sheet-rolltemplate-DSA-Nahkampf-Parade .sheet-row4 {
     grid-row-start: 4;
 }
-.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-row4 {
+.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-row4,
+.sheet-rolltemplate-DSA-Fernkampf-AT .sheet-row4 {
     align-self: center;
     grid-row-start: 4;
 }
 .sheet-rolltemplate-DSA-Nahkampf-Attacke .sheet-row5,
 .sheet-rolltemplate-DSA-Nahkampf-Parade .sheet-row5,
-.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-row5 {
+.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-row5,
+.sheet-rolltemplate-DSA-Fernkampf-AT .sheet-row5 {
     grid-row-start: 5;
 }
 .sheet-rolltemplate-DSA-Nahkampf-Attacke .sheet-row6,
 .sheet-rolltemplate-DSA-Nahkampf-Parade .sheet-row6,
-.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-row6 {
+.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-row6,
+.sheet-rolltemplate-DSA-Fernkampf-AT .sheet-row6 {
     grid-row-start: 6;
 }
 .sheet-rolltemplate-DSA-Nahkampf-Attacke .sheet-colspan2,
 .sheet-rolltemplate-DSA-Nahkampf-Parade .sheet-colspan2,
-.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-colspan2 {
+.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-colspan2,
+.sheet-rolltemplate-DSA-Fernkampf-AT .sheet-colspan2 {
     grid-column-end: span 2;
 }
 .sheet-rolltemplate-DSA-Nahkampf-Attacke .sheet-colspan3,
 .sheet-rolltemplate-DSA-Nahkampf-Parade .sheet-colspan3,
-.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-colspan3 {
+.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-colspan3,
+.sheet-rolltemplate-DSA-Fernkampf-AT .sheet-colspan3 {
     grid-column-end: span 3;
 }
 .sheet-rolltemplate-DSA-Nahkampf-Attacke .sheet-colspan4,
 .sheet-rolltemplate-DSA-Nahkampf-Parade .sheet-colspan4,
-.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-colspan4 {
+.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-colspan4,
+.sheet-rolltemplate-DSA-Fernkampf-AT .sheet-colspan4 {
     grid-column-end: span 4;
 }
 .sheet-rolltemplate-DSA-Nahkampf-Attacke .sheet-result,
 .sheet-rolltemplate-DSA-Nahkampf-Parade .sheet-result,
-.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-result {
+.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-result,
+.sheet-rolltemplate-DSA-Fernkampf-AT .sheet-result {
     display: grid;
     grid-template-columns: 30% 70%;
 }
 .sheet-rolltemplate-DSA-Nahkampf-Attacke .sheet-confirm-roll-details,
 .sheet-rolltemplate-DSA-Nahkampf-Parade .sheet-confirm-roll-details,
-.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-confirm-roll-details {
+.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-confirm-roll-details,
+.sheet-rolltemplate-DSA-Fernkampf-AT .sheet-confirm-roll-details {
     display: grid;
     grid-template-columns: 85% 15%;
 }
 .sheet-rolltemplate-DSA-Nahkampf-Attacke .sheet-roll-crit,
 .sheet-rolltemplate-DSA-Nahkampf-Parade .sheet-roll-crit,
-.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-roll-crit {
+.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-roll-crit,
+.sheet-rolltemplate-DSA-Fernkampf-AT .sheet-roll-crit {
     background-color: #cdf2f1;
 }
 .sheet-rolltemplate-DSA-Nahkampf-Attacke .sheet-roll-fumble,
 .sheet-rolltemplate-DSA-Nahkampf-Parade .sheet-roll-fumble,
-.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-roll-fumble {
+.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-roll-fumble,
+.sheet-rolltemplate-DSA-Fernkampf-AT .sheet-roll-fumble {
     background-color: #f2e3cd;
 }
 .sheet-rolltemplate-DSA-Nahkampf-Attacke .sheet-roll-fail,
 .sheet-rolltemplate-DSA-Nahkampf-Parade .sheet-roll-fail,
-.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-roll-fail {
+.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-roll-fail,
+.sheet-rolltemplate-DSA-Fernkampf-AT .sheet-roll-fail {
     background-color: #f2f1cd;
 }
 .sheet-rolltemplate-DSA-Nahkampf-Attacke .sheet-roll-success,
 .sheet-rolltemplate-DSA-Nahkampf-Parade .sheet-roll-success,
-.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-roll-success {
+.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-roll-success,
+.sheet-rolltemplate-DSA-Fernkampf-AT .sheet-roll-success {
     background-color: #d7f2cd;
 }
 .sheet-rolltemplate-DSA-Nahkampf-Attacke .sheet-roll-confirmed-crit,
 .sheet-rolltemplate-DSA-Nahkampf-Parade .sheet-roll-confirmed-crit,
-.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-roll-confirmed-crit {
+.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-roll-confirmed-crit,
+.sheet-rolltemplate-DSA-Fernkampf-AT .sheet-roll-confirmed-crit {
     background-color: #e8cdf2;
 }
 .sheet-rolltemplate-DSA-Nahkampf-Attacke .sheet-roll-confirmed-fumble,
 .sheet-rolltemplate-DSA-Nahkampf-Parade .sheet-roll-confirmed-fumble,
-.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-roll-confirmed-fumble {
+.sheet-rolltemplate-DSA-Kampf-Ausweichen .sheet-roll-confirmed-fumble,
+.sheet-rolltemplate-DSA-Fernkampf-AT .sheet-roll-confirmed-fumble {
     background-color: #f2cdcd;
 }
