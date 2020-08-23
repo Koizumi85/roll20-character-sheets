@@ -13314,240 +13314,74 @@
 </rolltemplate>
 
 <rolltemplate class="sheet-rolltemplate-DSA-Kampf-Ausweichen">
-{{#rollTotal() wurf eff_wert}}
-    {{#rollWasCrit() wurf}}
-        {{#rollWasCrit() pruefwurf}}
-            <table class="sheet-templates-succ-crc">
-        {{/rollWasCrit() pruefwurf}}
-        {{#rollWasFumble() pruefwurf}}
-            <table class="sheet-templates-succ-cru">
-        {{/rollWasFumble() pruefwurf}}
-        {{#^rollWasCrit() pruefwurf}}
-            {{#^rollWasFumble() pruefwurf}}
-                {{#rollTotal() pruefwurf eff_wert}}
-                    <table class="sheet-templates-succ-crc">
-                {{/rollTotal() pruefwurf eff_wert}}
-                {{#rollLess() pruefwurf eff_wert}}
-                    <table class="sheet-templates-succ-crc">
-                {{/rollLess() pruefwurf eff_wert}}
-                {{#rollGreater() pruefwurf eff_wert}}
-                    <table class="sheet-templates-succ-cru">
-                {{/rollGreater() pruefwurf eff_wert}}
-            {{/^rollWasFumble() pruefwurf}}
-        {{/^rollWasCrit() pruefwurf}}
-    {{/rollWasCrit() wurf}}
-    {{#rollWasFumble() wurf}}
-        {{#rollWasCrit() pruefwurf}}
-            <table class="sheet-templates-fail-cru">
-        {{/rollWasCrit() pruefwurf}}
-        {{#rollWasFumble() pruefwurf}}
-            <table class="sheet-templates-fail-crc">
-        {{/rollWasFumble() pruefwurf}}
-        {{#^rollWasCrit() pruefwurf}}
-            {{#^rollWasFumble() pruefwurf}}
-                {{#rollTotal() pruefwurf eff_wert}}
-                    <table class="sheet-templates-fail-cru">
-                {{/rollTotal() pruefwurf eff_wert}}
-                {{#rollLess() pruefwurf eff_wert}}
-                    <table class="sheet-templates-fail-cru">
-                {{/rollLess() pruefwurf eff_wert}}
-                {{#rollGreater() pruefwurf eff_wert}}
-                    <table class="sheet-templates-fail-crc">
-                {{/rollGreater() pruefwurf eff_wert}}
-            {{/^rollWasFumble() pruefwurf}}
-        {{/^rollWasCrit() pruefwurf}}
-    {{/rollWasFumble() wurf}}
+    <span class="col1 colspan4 row1 roll-name sheet-abbr" title="Ausweichen-Proben werden momentan nach den Regeln aus &bdquo;Wege des Schwerts&ldquo; gewürfelt. Dies bedeutet, dass die Ausweichen-Probe grundsätzlich auf den Paradebasiswert gewürfelt wird. Die Probe wird bislang vom Charakterbogen aus erschwert um die Behinderung, erleichtert für die Sonderfertigkeiten &bdquo;Ausweichen I&ldquo; bis &bdquo;Ausweichen III&ldquo; und modifiziert um den händisch eingetragenen Probenmodifikator. Dieser Probenmodifikator sollte vom Meister entsprechend &bdquo;Wege des Schwerts&ldquo; gewählt werden. Folgende Effekte könnten vom Charakterbogen sinnvoll berücksichtigt werden, müssen momentan aber noch händisch über den Probenmodifikator berücksichtigt werden: niedrige Ausdauer, niedrige Lebensenergie und der Akrobatiktalentwert.">{{name}}</span>
+    <span class="col1 row2 sheet-abbr" title="Parade-Basiswert. Ausgangswert für Ausweichen-Proben und daher auch als 'Ausweichenwert' bezeichnet.">PA-Basis: </span>
+    <span class="col2 row2">{{pa}}</span>
+    <span class="col3 row2 sheet-abbr" title="Behinderung">BE: </span>
+    <span class="col4 row2">{{be}}</span>
+    <span class="col1 row3 sheet-abbr" title="Modifikator für Ausweichenproben berechnet aus den Sonderfertigkeiten 'Ausweichen I', 'Ausweichen II' und 'Ausweichen III'">A-Mod.: </span>
+    <span class="col2 row3">{{ausweichenmod}}</span>
+    <span class="col3 row3 sheet-abbr" title="Variabler Modifikator. Händisch eingegeben">P-Mod.: </span>
+    <span class="col4 row3">{{probenmod}}</span>
+    <span class="col1 colspan3 row4">Würfelergebnis: </span>
+    <span class="col4 row4 sheet-abbr">{{wurf}}</span>
+    <!-- Different colors for the general result line -->
+    {{#rollWasCrit() wurf}}<div class="roll-crit colspan4 row5 result">{{/rollWasCrit() wurf}}
+    {{#rollWasFumble() wurf}}<div class="roll-fumble colspan4 row5 result">{{/rollWasFumble() wurf}}
     {{#^rollWasCrit() wurf}}
         {{#^rollWasFumble() wurf}}
-            <table class="sheet-templates-succ-uncr">
+            {{#^rollGreater() wurf eff_wert}}<div class="roll-success colspan4 row5 result">{{/^rollGreater() wurf eff_wert}}
+            {{#rollGreater() wurf eff_wert}}<div class="roll-fail colspan4 row5 result">{{/rollGreater() wurf eff_wert}}
         {{/^rollWasFumble() wurf}}
     {{/^rollWasCrit() wurf}}
-{{/rollTotal() wurf eff_wert}}
-{{#rollLess() wurf eff_wert}}
+
+        <span class="col1 row1">Ergebnis: </span>
+    <!-- Textual representation of the result -->
+        {{#^rollGreater() wurf eff_wert}}<span class="col2 row1">Gelungen</span>{{/^rollGreater() wurf eff_wert}}
+        {{#rollGreater() wurf eff_wert}}<span class="col2 row1">Misslungen</span>{{/rollGreater() wurf eff_wert}}
+    </div>
+
+    <!-- If it was a 1 -->
     {{#rollWasCrit() wurf}}
-        {{#rollWasCrit() pruefwurf}}
-            <table class="sheet-templates-succ-crc">
-        {{/rollWasCrit() pruefwurf}}
-        {{#rollWasFumble() pruefwurf}}
-            <table class="sheet-templates-succ-cru">
-        {{/rollWasFumble() pruefwurf}}
-        {{#^rollWasCrit() pruefwurf}}
-            {{#^rollWasFumble() pruefwurf}}
-                {{#rollTotal() pruefwurf eff_wert}}
-                    <table class="sheet-templates-succ-crc">
-                {{/rollTotal() pruefwurf eff_wert}}
-                {{#rollLess() pruefwurf eff_wert}}
-                    <table class="sheet-templates-succ-crc">
-                {{/rollLess() pruefwurf eff_wert}}
-                {{#rollGreater() pruefwurf eff_wert}}
-                    <table class="sheet-templates-succ-cru">
-                {{/rollGreater() pruefwurf eff_wert}}
-            {{/^rollWasFumble() pruefwurf}}
-        {{/^rollWasCrit() pruefwurf}}
+        <!-- pruefwurf roll was set -->
+        {{#pruefwurf}}
+            <!-- add color if the roll was confirmed -->
+            {{#^rollGreater() pruefwurf eff_wert}}<div class="roll-confirmed-crit colspan4 row6 confirm-roll-details">{{/^rollGreater() pruefwurf eff_wert}}
+            {{#rollGreater() pruefwurf eff_wert}}<div class="colspan4 row6 confirm-roll-details">{{/rollGreater() pruefwurf eff_wert}}                
+                <span class="col1 row1">Prüfwurf: </span>
+                <span class="col2 row1 sheet-abbr">{{pruefwurf}}</span>
+                {{#^rollGreater() pruefwurf eff_wert}}
+                    <div class="col1 colspan2 row2">
+                        <span title="Prüfwurf ergabe glückliches Ausweichen. Auswirkungen gemäß WdS S. 84 beachten!">Bestätigtes Glückliches Ausweichen!</span></div>
+                {{/^rollGreater() pruefwurf eff_wert}}
+            </div>
+        {{/pruefwurf}}
+        <!-- no pruefwurf roll was set -->
+        {{^pruefwurf}}
+            <span class="col1 colspan4 row6 sheet-abbr" title="Automatische Prüfwürfe deaktiviert. Daher Prüfwurf manuell gegen angezeigten Wert durchführen.">Prüfwurf durchführen. <br /> Glückliches Ausweichen bei Wurf &lt;= {{eff_wert}}</span>
+        {{/pruefwurf}}
     {{/rollWasCrit() wurf}}
+    <!-- if it was a 20 -->
     {{#rollWasFumble() wurf}}
-        {{#rollWasCrit() pruefwurf}}
-            <table class="sheet-templates-fail-cru">
-        {{/rollWasCrit() pruefwurf}}
-        {{#rollWasFumble() pruefwurf}}
-            <table class="sheet-templates-fail-crc">
-        {{/rollWasFumble() pruefwurf}}
-        {{#^rollWasCrit() pruefwurf}}
-            {{#^rollWasFumble() pruefwurf}}
-                {{#rollTotal() pruefwurf eff_wert}}
-                    <table class="sheet-templates-fail-cru">
-                {{/rollTotal() pruefwurf eff_wert}}
-                {{#rollLess() pruefwurf eff_wert}}
-                    <table class="sheet-templates-fail-cru">
-                {{/rollLess() pruefwurf eff_wert}}
+        <!-- pruefwurf roll was set -->
+        {{#pruefwurf}}
+            <!-- add color if the roll was confirmed -->
+            {{#rollGreater() pruefwurf eff_wert}}<div class="roll-confirmed-fumble colspan4 row6 confirm-roll-details">{{/rollGreater() pruefwurf eff_wert}}
+            {{#^rollGreater() pruefwurf eff_wert}}<div class="colspan4 row6 confirm-roll-details">{{/^rollGreater() pruefwurf eff_wert}}                
+                <span class="col1 row1">Prüfwurf: </span>
+                <span class="col2 row1 sheet-abbr">{{pruefwurf}}</span>
                 {{#rollGreater() pruefwurf eff_wert}}
-                    <table class="sheet-templates-fail-crc">
+                    <div class="col1 colspan2 row2">
+                        <span class="sheet-abbr" title="Prüfwurfe ergab bestätigten Ausweichen-Patzer. Die Patzerfolgen können mit Button 'Patzer' in der Parade-Box bestimmt werden" >Bestätigter Ausweichen-Patzer! </span><br />
+                        Patzerfolgen auswürfeln!</div>
                 {{/rollGreater() pruefwurf eff_wert}}
-            {{/^rollWasFumble() pruefwurf}}
-        {{/^rollWasCrit() pruefwurf}}
+            </div>
+        {{/pruefwurf}}
+        <!-- no pruefwurf roll was set -->
+        {{^pruefwurf}}
+            <span class="col1 colspan4 row6 sheet-abbr" title="Automatische Prüfwürfe deaktiviert. Daher Prüfwurf manuell gegen angezeigten Wert durchführen.">Prüfwurf durchführen. <br /> Patzer bei Wurf &gt; {{eff_wert}}</span>
+        {{/pruefwurf}}
     {{/rollWasFumble() wurf}}
-    {{#^rollWasCrit() wurf}}
-        {{#^rollWasFumble() wurf}}
-        <table class="sheet-templates-succ-uncr">
-        {{/^rollWasFumble() wurf}}
-    {{/^rollWasCrit() wurf}}
-{{/rollLess() wurf eff_wert}}
-{{#rollGreater() wurf eff_wert}}
-    {{#rollWasCrit() wurf}}
-        {{#rollWasCrit() pruefwurf}}
-            <table class="sheet-templates-succ-crc">
-        {{/rollWasCrit() pruefwurf}}
-        {{#rollWasFumble() pruefwurf}}
-            <table class="sheet-templates-succ-cru">
-        {{/rollWasFumble() pruefwurf}}
-        {{#^rollWasCrit() pruefwurf}}
-            {{#^rollWasFumble() pruefwurf}}
-                {{#rollTotal() pruefwurf eff_wert}}
-                    <table class="sheet-templates-succ-crc">
-                {{/rollTotal() pruefwurf eff_wert}}
-                {{#rollLess() pruefwurf eff_wert}}
-                    <table class="sheet-templates-succ-crc">
-                {{/rollLess() pruefwurf eff_wert}}
-                {{#rollGreater() pruefwurf eff_wert}}
-                    <table class="sheet-templates-succ-cru">
-                {{/rollGreater() pruefwurf eff_wert}}
-            {{/^rollWasFumble() pruefwurf}}
-        {{/^rollWasCrit() pruefwurf}}
-    {{/rollWasCrit() wurf}}
-    {{#rollWasFumble() wurf}}
-        {{#rollWasCrit() pruefwurf}}
-            <table class="sheet-templates-fail-cru">
-        {{/rollWasCrit() pruefwurf}}
-        {{#rollWasFumble() pruefwurf}}
-            <table class="sheet-templates-fail-crc">
-        {{/rollWasFumble() pruefwurf}}
-        {{#^rollWasCrit() pruefwurf}}
-            {{#^rollWasFumble() pruefwurf}}
-                {{#rollTotal() pruefwurf eff_wert}}
-                    <table class="sheet-templates-fail-cru">
-                {{/rollTotal() pruefwurf eff_wert}}
-                {{#rollLess() pruefwurf eff_wert}}
-                    <table class="sheet-templates-fail-cru">
-                {{/rollLess() pruefwurf eff_wert}}
-                {{#rollGreater() pruefwurf eff_wert}}
-                    <table class="sheet-templates-fail-crc">
-                {{/rollGreater() pruefwurf eff_wert}}
-            {{/^rollWasFumble() pruefwurf}}
-        {{/^rollWasCrit() pruefwurf}}
-    {{/rollWasFumble() wurf}}
-    {{#^rollWasCrit() wurf}}
-        {{#^rollWasFumble() wurf}}
-            <table class="sheet-templates-fail-uncr">
-        {{/^rollWasFumble() wurf}}
-    {{/^rollWasCrit() wurf}}
-{{/rollGreater() wurf eff_wert}}
-        <tr>
-            <th colspan="2">{{name}}</th>
-        </tr>
-{{#rollGreater() ansage 0}}
-        <tr>
-            <td colspan="2" class="sheet-templates-result">Ausweichen {{#rollLess() modansage 0}}{{modansage}}{{/rollLess() modansage 0}}{{#rollTotal() modansage 0}}&#177;{{modansage}}{{/rollTotal() modansage 0}}{{#rollGreater() modansage 0}}+{{modansage}}{{/rollGreater() modansage 0}} <span class="sheet-templates-result-content"></span> ({{wurf}}).</td>
-        </tr>
-        <tr>
-            <td><span class="sheet-abbr" title="Parade-Basiswert. Ausgangswert für Ausweichen-Proben und daher auch als &bdquo;Ausweichenwert&ldquo; bezeichnet.">PA-Basis</span>: {{pa}}</td>
-            <td><span class="sheet-abbr" title="Behinderung">BE</span>: {{be}}</td>
-        </tr>
-        <tr>
-            <td><span class="sheet-abbr" title="Fester Modifikator für Ausweichen-Proben. Berücksichtigt momentan nur die Sonderfertigkeiten &bdquo;Ausweichen I&ldquo;, &bdquo;Ausweichen II&ldquo; und &bdquo;Ausweichen III&ldquo;.">A.-Mod.</span>: {{ausweichenmod}}</td>
-            <td><span class="sheet-abbr" title="Variabler Modifikator für diese Probe, händisch eingegeben">P.-Mod.</span>: {{#rollLess() probenmod 0}}{{probenmod}}{{/rollLess() probenmod 0}}{{#rollTotal() probenmod 0}}&#177;{{probenmod}}{{/rollTotal() probenmod 0}}{{#rollGreater() probenmod 0}}+{{probenmod}}{{/rollGreater() probenmod 0}}</td>
-        </tr>
-        <tr>
-            <td colspan="2">Ansage: {{ansage}}</td>
-        </tr>
-{{/rollGreater() ansage 0}}
-{{#^rollGreater() ansage 0}}
-        <tr>
-            <td colspan="2" class="sheet-templates-result">Ausweichen {{#rollLess() mod 0}}{{mod}}{{/rollLess() mod 0}}{{#rollTotal() mod 0}}&#177;{{mod}}{{/rollTotal() mod 0}}{{#rollGreater() mod 0}}+{{mod}}{{/rollGreater() mod 0}} <span class="sheet-templates-result-content"></span> ({{wurf}}).</td>
-        </tr>
-        <tr>
-            <td><span class="sheet-abbr" title="Parade-Basiswert. Ausgangswert für Ausweichen-Proben und daher auch als &bdquo;Ausweichenwert&ldquo; bezeichnet.">PA-Basis</span>: {{pa}}</td>
-            <td><span class="sheet-abbr" title="Behinderung">BE</span>: {{be}}</td>
-        </tr>
-        <tr>
-            <td><span class="sheet-abbr" title="Fester Modifikator für Ausweichen-Proben. Berücksichtigt momentan nur die Sonderfertigkeiten &bdquo;Ausweichen I&ldquo;, &bdquo;Ausweichen II&ldquo; und &bdquo;Ausweichen III&ldquo;.">A.-Mod.</span>: {{ausweichenmod}}</td>
-            <td><span class="sheet-abbr" title="Variabler Modifikator für diese Probe, händisch eingegeben">P.-Mod.</span>: {{#rollLess() probenmod 0}}{{probenmod}}{{/rollLess() probenmod 0}}{{#rollTotal() probenmod 0}}&#177;{{probenmod}}{{/rollTotal() probenmod 0}}{{#rollGreater() probenmod 0}}+{{probenmod}}{{/rollGreater() probenmod 0}}</td>
-        </tr>
-{{/^rollGreater() ansage 0}}
-        {{#rollLess() eff_wert 0}}
-        <tr>
-            <td colspan="2" class="sheet-templates-warning"><span class="sheet-abbr" title="Falls die Erschwernis eine Ansage enthält und WdS 59 sinngemäß auf alle Abwehraktionen und damit auch auf die Ausweichenprobe angewendet wird, ist es möglich, dass dieses Ausweichen nicht hätte gewürfelt werden dürfen.">Hohe Erschwernis.</span></td>
-        </tr>
-        {{/rollLess() eff_wert 0}}
-        {{#rollWasCrit() wurf}}
-        <tr>
-            {{#rollWasCrit() pruefwurf}}
-                    <td colspan="2" class="sheet-templates-warning">Glückliches Ausweichen! Prüfwurf: {{pruefwurf}}.</td>
-            {{/rollWasCrit() pruefwurf}}
-            {{#rollWasFumble() pruefwurf}}
-                    <td colspan="2" class="sheet-templates-warning">Gewöhnliches Ausweichen! Prüfwurf: {{pruefwurf}}.</td>
-            {{/rollWasFumble() pruefwurf}}
-            {{#^rollWasCrit() pruefwurf}}
-                {{#^rollWasFumble() pruefwurf}}
-                    {{#rollTotal() pruefwurf eff_wert}}
-                        <td colspan="2" class="sheet-templates-warning">Glückliches Ausweichen! Prüfwurf: {{pruefwurf}}.</td>
-                    {{/rollTotal() pruefwurf eff_wert}}
-                    {{#rollLess() pruefwurf eff_wert}}
-                        <td colspan="2" class="sheet-templates-warning">Glückliches Ausweichen! Prüfwurf: {{pruefwurf}}.</td>
-                    {{/rollLess() pruefwurf eff_wert}}
-                    {{#rollGreater() pruefwurf eff_wert}}
-                        <td colspan="2" class="sheet-templates-warning">Gewöhnliches Ausweichen! Prüfwurf: {{pruefwurf}}.</td>
-                    {{/rollGreater() pruefwurf eff_wert}}
-                {{/^rollWasFumble() pruefwurf}}
-            {{/^rollWasCrit() pruefwurf}}
-        </tr>
-        {{/rollWasCrit() wurf}}
-        {{#rollWasFumble() wurf}}
-        <tr>
-            {{#rollWasCrit() pruefwurf}}
-                <td colspan="2" class="sheet-templates-warning">Unbestätigter Ausweichenpatzer! Prüfwurf: {{pruefwurf}}. Auswirkungen zum Glück verhindert.</td>
-            {{/rollWasCrit() pruefwurf}}
-            {{#rollWasFumble() pruefwurf}}
-                <td colspan="2" class="sheet-templates-warning">Bestätigter Ausweichenpatzer! Prüfwurf: {{pruefwurf}}. Auswirkungen erwürfeln.</td>
-            {{/rollWasFumble() pruefwurf}}
-            {{#^rollWasCrit() pruefwurf}}
-                {{#^rollWasFumble() pruefwurf}}
-                    {{#rollTotal() pruefwurf eff_wert}}
-                        <td colspan="2" class="sheet-templates-warning">Unbestätigter Ausweichenpatzer! Prüfwurf: {{pruefwurf}}. Auswirkungen zum Glück verhindert.</td>
-                    {{/rollTotal() pruefwurf eff_wert}}
-                    {{#rollLess() pruefwurf eff_wert}}
-                        <td colspan="2" class="sheet-templates-warning">Unbestätigter Ausweichenpatzer! Prüfwurf: {{pruefwurf}}. Auswirkungen zum Glück verhindert.</td>
-                    {{/rollLess() pruefwurf eff_wert}}
-                    {{#rollGreater() pruefwurf eff_wert}}
-                        <td colspan="2" class="sheet-templates-warning">Bestätigter Ausweichenpatzer! Prüfwurf: {{pruefwurf}}. Auswirkungen erwürfeln.</td>
-                    {{/rollGreater() pruefwurf eff_wert}}
-                {{/^rollWasFumble() pruefwurf}}
-            {{/^rollWasCrit() pruefwurf}}
-        </tr>
-        {{/rollWasFumble() wurf}}
-        <tr>
-            <td colspan="2" class="sheet-templates-warning"><span class="sheet-abbr" title="Ausweichen-Proben werden momentan nach den Regeln aus &bdquo;Wege des Schwerts&ldquo; gewürfelt. Dies bedeutet, dass die Ausweichen-Probe grundsätzlich auf den Paradebasiswert gewürfelt wird. Die Probe wird bislang vom Charakterbogen aus erschwert um die Behinderung, erleichtert für die Sonderfertigkeiten &bdquo;Ausweichen I&ldquo; bis &bdquo;Ausweichen III&ldquo; und modifiziert um den händisch eingetragenen Probenmodifikator. Dieser Probenmodifikator sollte vom Meister entsprechend &bdquo;Wege des Schwerts&ldquo; gewählt werden. Folgende Effekte könnten vom Charakterbogen sinnvoll berücksichtigt werden, müssen momentan aber noch händisch über den Probenmodifikator berücksichtigt werden: niedrige Ausdauer, niedrige Lebensenergie und der Akrobatiktalentwert.">Hinweise zu Ausweichen-Proben.</span></td>
-        </tr>
-    </table>
 </rolltemplate>
 
 <rolltemplate class="sheet-rolltemplate-DSA-Fernkampf-AT">
