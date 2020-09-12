@@ -15203,6 +15203,10 @@ function migrateTo99999999(migrationChain) {
             
             attrsToChange["shield_at"] = result.shieldAt;
             attrsToChange["shield_at_available"] = result.shieldAtAvailable;
+
+            //console.log("going to set confirmation roll default values in migration");
+            attrsToChange["confirmation_roll"] = "{{pruefwurf=[[1d20cs1cf20]]}}";
+            attrsToChange["disable_confirmation_rolls"] = "off";
     
             setAttrs(attrsToChange, {}, function(){
                 callNextMigration(migrationChain);
@@ -15287,7 +15291,12 @@ function migrationCheck() {
 }
 
 function setDefaultValues() {
-    
+    console.log("new character detected. going to set default values");
+    var attrsToChange = {};
+    attrsToChange["confirmation_roll"] = "{{pruefwurf=[[1d20cs1cf20]]}}";
+    attrsToChange["disable_confirmation_rolls"] = "off";
+
+    setAttrs(attrsToChange);
 }
 
 function setCurrentVersion(migrationChain) {
@@ -15505,24 +15514,8 @@ function migrateTo20190427 (migrationChain) {
         });
     });
 }
-/*
-    This method can be used to test if some default values are set on a character sheet and set them if not
-*/
-function setDefaultValues() {
-    getAttrs(["confirmation_roll"], function(values) {
-        let attrsToChange = {};
-        if (!values["confirmation_roll"]) {
-            attrsToChange["confirmation_roll"] = "{{pruefwurf=[[1d20cs1cf20]]}}";
-            attrsToChange["disable_confirmation_rolls"] = "off";
-        }
-        if (Object.keys(attrsToChange).length > 0) {
-            setAttrs(attrsToChange);
-        }
-    })
-}
 
 on("sheet:opened", function() {
-    setDefaultValues();
     migrationCheck();
 });
 
@@ -16397,11 +16390,13 @@ function calculateShieldAttack(values, activeShieldRowId) {
 }
 
 on("change:disable_confirmation_rolls", function(eventInfos) {
+    console.log("calculation confirmation rolls for event");
+    console.log(eventInfos);
     let attrsToChange = {};
     if (eventInfos.newValue === "on") {
-        attrsToChange["confirmation_roll"] = ""; "{{pruefwurf=[[1d20cs1cf20]]}}";
-    } else {
         attrsToChange["confirmation_roll"] = "";
+    } else {
+        attrsToChange["confirmation_roll"] = "{{pruefwurf=[[1d20cs1cf20]]}}";
     }
     setAttrs(attrsToChange);
 });
