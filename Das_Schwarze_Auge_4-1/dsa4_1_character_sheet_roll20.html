@@ -15251,6 +15251,7 @@ function migrationCheck() {
         */
 
         if (isNaN(dataVersion)) {
+            setDefaultValues();
             setCurrentVersion(null);
             return;
         }
@@ -15283,6 +15284,10 @@ function migrationCheck() {
         }
 
     });
+}
+
+function setDefaultValues() {
+    
 }
 
 function setCurrentVersion(migrationChain) {
