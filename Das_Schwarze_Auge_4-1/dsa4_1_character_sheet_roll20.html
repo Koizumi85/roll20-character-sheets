@@ -11199,7 +11199,7 @@
                     </th>
                     <th>BE <input class="sheet-stat-immutable" disabled="disabled" type="text" name="attr_Ges_BE_Anzeige" value="@{BE_TaW}" style="width: 2em">
                     </th>
-                    <th><button name="Initiative" type="roll" value="@{gm_roll_opt} &{template:DSA-Initiative} {{char=@{Name}}} {{mod=[[?{Bonus (+) oder Malus (−)|0}d1cs0cf2]]}} {{dice=[[@{INI_dice_count}]]}} {{IB=[[@{INIBasis2}]]}} {{be=[[@{BE_TaW}]]}} {{ini=[[(@{INI_dice_count}d6 + @{INIBasis2} - @{BE_TaW} + [[@{ShieldParryINI}]] + [[?{Bonus (+) oder Malus (−)|0}d1cs0cf2]])&{tracker}]]}}"> <span>Initiative</span></button> mit <select type="number" name="attr_INI_dice_count" style="width: 4em">
+                    <th><button name="Initiative" type="roll" value="@{gm_roll_opt} &{template:DSA-Initiative} {{char=@{Name}}} {{mod=[[?{Bonus (+) oder Malus (−)|0}d1cs0cf2]]}} {{dice=[[@{INI_dice_count}]]}} {{IB=[[@{INIBasis2}]]}} {{be=[[@{BE_TaW}]]}} {{ini=[[(@{INI_dice_count}d6 + @{INIBasis2} - @{BE_TaW} + @{weapon_ini_mod} + [[@{ShieldParryINI}]] + [[?{Bonus (+) oder Malus (−)|0}d1cs0cf2]])&{tracker}]]}}"> <span>Initiative</span></button> mit <select type="number" name="attr_INI_dice_count" style="width: 4em">
                 <option value="1" selected="selected">1</option>
                 <option value="2">2</option>
             </select><span class="sheet-abbr" title="sechsseitiger Würfel" style="margin-right: 1em;">W6</span>
@@ -15934,12 +15934,33 @@ function migrateTo20200809(migrationChain) {
     });
 }
 
+function migrateTo99999999(migrationChain) {
+
+    getAttrs(["NKW_Aktiv1", "NKW_Aktiv2", "NKW_Aktiv3", "NKW_Aktiv4", "INIModNKW1", "INIModNKW2", "INIModNKW3", "INIModNKW4" ], function(values) {
+        const attrsToChange = {};
+        if (values["NKW_Aktiv1"] === "on") {
+            attrsToChange["weapon_ini_mod"] = parseInt(values["INIModNKW1"]);
+        } else if (values["NKW_Aktiv2"] === "on") {
+            attrsToChange["weapon_ini_mod"] = parseInt(values["INIModNKW2"]);
+        } else if (values["NKW_Aktiv3"] === "on") {
+            attrsToChange["weapon_ini_mod"] = parseInt(values["INIModNKW3"]);
+        } else if (values["NKW_Aktiv3"] === "on") {
+            attrsToChange["weapon_ini_mod"] = parseInt(values["INIModNKW4"]);
+        } else {
+            attrsToChange["weapon_ini_mod"] = 0;
+        }
+
+        setAttrs(attrsToChange);
+    });
+}
+
 /*
  this list has to be always ordered ascending in order to apply the migration steps in the correct order
 */
 var versionsWithMigrations = [
     20190427,
-    20200809
+    20200809,
+    99999999
 ]
 
 /*
@@ -16001,12 +16022,18 @@ function migrationCheck() {
         if (firstFunction) {
             functionsToCall.push("setCurrentVersion");
             window[firstFunction](functionsToCall);
+        } else if (dataVersion === 99999999) {
+            window["migrateTo99999999"]([]);
         }
     });
 }
 
 function setDefaultValues() {
-    
+    const attrsToChange = {};
+    attrsToChange["weapon_ini_mod"] = 0;
+    attrsToChange["BE_TaW"] = 0;
+
+    setAttrs(attrsToChange);
 }
 
 function setCurrentVersion(migrationChain) {
@@ -16334,7 +16361,7 @@ function calculateCombatValues() {
             setAttrs(attrsToChange);
             return;
         }
-        var variablesToGet = [ "NKW_AT_typ" + weapon, "NKW" + weapon + "ATMod", "NKW_PA_typ" + weapon, "NKW" + weapon + "PAMod", "NKW" + weapon + "_Spez", 
+        var variablesToGet = [ "NKW_AT_typ" + weapon, "NKW" + weapon + "ATMod", "NKW_PA_typ" + weapon, "NKW" + weapon + "PAMod", "NKW" + weapon + "_Spez", "INIModNKW" + weapon, 
             "AT_Anderthalbhander", "AT_dolche", "AT_fechtwaffen", "AT_hiebwaffen", 
             "AT_infanteriewaffen", "AT_kettenstabe", "AT_kettenwaffen", "AT_lanzenreiten", "AT_peitsche", "AT_raufen", "AT_ringen", "AT_sabel", 
             "AT_schwerter", "AT_speere", "AT_stabe", "AT_zweihandflegel", "AT_zweihand-hiebwaffen", "AT_zweihandschwerter", 
@@ -16359,6 +16386,9 @@ function calculateCombatValues() {
         }
         getAttrs(variablesToGet, function(values) {
             var attrsToChange = {};
+            
+            // Calculate weapon ini modificator
+            attrsToChange["weapon_ini_mod"] = parseInt(values["INIModNKW" + weapon]);
 
             // Berechne Waffen-AT
             var attackType = values["NKW_AT_typ" + weapon];
